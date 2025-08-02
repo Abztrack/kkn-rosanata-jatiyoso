@@ -1,7 +1,19 @@
+// components/HeroSection.tsx - Updated version
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onJelajahiProgram?: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onJelajahiProgram }) => {
+  const handleGalleryClick = () => {
+    const galleryElement = document.querySelector('#galeri');
+    if (galleryElement) {
+      galleryElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400"></div>
@@ -30,10 +42,16 @@ const HeroSection: React.FC = () => {
           "Upaya Pengembangan Ekonomi Mandiri dan Berkelanjutan melalui Optimalisasi Sumber Daya Pertanian, Pemberdayaan Sektor Pariwisata, serta Asistensi Bersama BUMDes"
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl">
+          <button 
+            onClick={onJelajahiProgram}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
+          >
             Jelajahi Program
           </button>
-          <button className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+          <button 
+            onClick={handleGalleryClick}
+            className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+          >
             Lihat Galeri
           </button>
         </div>
@@ -46,4 +64,4 @@ const HeroSection: React.FC = () => {
   );
 };
 
-export default HeroSection; 
+export default HeroSection;

@@ -1,3 +1,4 @@
+// components/Navigation.tsx - Updated sesuai struktur yang sudah ada
 import React from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -5,10 +6,35 @@ interface NavigationProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
   isScrolled: boolean;
+  onJelajahiProgram?: () => void; // Tambahan props untuk navigasi ke program
 }
 
-const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, isScrolled }) => {
-  const navItems = ['Home', 'Desa'];
+const Navigation: React.FC<NavigationProps> = ({ 
+  isMenuOpen, 
+  setIsMenuOpen, 
+  isScrolled,
+  onJelajahiProgram 
+}) => {
+  // Update navItems dengan menambahkan Program
+  const navItems = [
+    { label: 'Home', href: '#home' },
+    { label: 'Program', action: onJelajahiProgram }, // Menggunakan action untuk navigasi
+    { label: 'Desa', href: '#desa' }
+  ];
+
+  const handleNavClick = (item: typeof navItems[0]) => {
+    if (item.action) {
+      // Jika ada action (navigasi ke halaman program)
+      item.action();
+    } else if (item.href) {
+      // Jika ada href (scroll ke section)
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMenuOpen(false); // Tutup menu mobile setelah klik
+  };
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -32,17 +58,18 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, isSc
             </div>
           </div>
 
+          {/* Desktop Navigation - Updated */}
           <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className={`font-medium transition-colors ${
+            {navItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleNavClick(item)}
+                className={`font-medium transition-colors cursor-pointer ${
                   isScrolled ? 'text-gray-700 hover:text-emerald-600' : 'text-white hover:text-emerald-300'
                 }`}
               >
-                {item}
-              </a>
+                {item.label}
+              </button>
             ))}
           </div>
 
@@ -55,18 +82,18 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, isSc
         </div>
       </div>
 
+      {/* Mobile Navigation - Updated */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium"
-                onClick={() => setIsMenuOpen(false)}
+            {navItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleNavClick(item)}
+                className="block w-full text-left px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium"
               >
-                {item}
-              </a>
+                {item.label}
+              </button>
             ))}
           </div>
         </div>
@@ -75,4 +102,4 @@ const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen, isSc
   );
 };
 
-export default Navigation; 
+export default Navigation;
