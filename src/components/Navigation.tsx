@@ -1,25 +1,49 @@
 // components/Navigation.tsx - Updated sesuai struktur yang sudah ada
-import React from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface NavigationProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
   isScrolled: boolean;
   onJelajahiProgram?: () => void; // Tambahan props untuk navigasi ke program
+  onUmkmNavigation?: (page: 'umkm-kamboja' | 'umkm-rambak') => void; // Props untuk navigasi UMKM
 }
 
 const Navigation: React.FC<NavigationProps> = ({ 
   isMenuOpen, 
   setIsMenuOpen, 
   isScrolled,
-  onJelajahiProgram 
+  onJelajahiProgram,
+  onUmkmNavigation
 }) => {
-  // Update navItems dengan menambahkan Program
+  const [isUmkmDropdownOpen, setIsUmkmDropdownOpen] = useState(false);
+  const umkmDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (umkmDropdownRef.current && !umkmDropdownRef.current.contains(event.target as Node)) {
+        setIsUmkmDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Update navItems dengan menambahkan Program dan UMKM
   const navItems = [
     { label: 'Home', href: '#home' },
     { label: 'Program', action: onJelajahiProgram }, // Menggunakan action untuk navigasi
     { label: 'Desa', href: '#desa' }
+  ];
+
+  const umkmItems = [
+    { label: 'Kamboja Jepang "Mas Sutardi"', page: 'umkm-kamboja' as const },
+    { label: 'Rambak "Mbak Yuni"', page: 'umkm-rambak' as const }
   ];
 
   const handleNavClick = (item: typeof navItems[0]) => {
@@ -34,6 +58,14 @@ const Navigation: React.FC<NavigationProps> = ({
       }
     }
     setIsMenuOpen(false); // Tutup menu mobile setelah klik
+  };
+
+  const handleUmkmClick = (page: 'umkm-kamboja' | 'umkm-rambak') => {
+    if (onUmkmNavigation) {
+      onUmkmNavigation(page);
+    }
+    setIsUmkmDropdownOpen(false);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -71,6 +103,37 @@ const Navigation: React.FC<NavigationProps> = ({
                 {item.label}
               </button>
             ))}
+            
+            {/* UMKM Dropdown */}
+            <div className="relative" ref={umkmDropdownRef}>
+              <button
+                onClick={() => setIsUmkmDropdownOpen(!isUmkmDropdownOpen)}
+                className={`font-medium transition-colors cursor-pointer flex items-center space-x-1 ${
+                  isScrolled ? 'text-gray-700 hover:text-emerald-600' : 'text-white hover:text-emerald-300'
+                }`}
+              >
+                <span>UMKM</span>
+                {isUmkmDropdownOpen ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
+              </button>
+              
+              {isUmkmDropdownOpen && (
+                <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                  {umkmItems.map((item, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleUmkmClick(item.page)}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 font-medium transition-colors"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           <button
@@ -95,6 +158,20 @@ const Navigation: React.FC<NavigationProps> = ({
                 {item.label}
               </button>
             ))}
+            
+            {/* Mobile UMKM Section */}
+            <div className="border-t border-gray-200 mt-2 pt-2">
+              <div className="px-3 py-2 text-gray-700 font-medium">UMKM</div>
+              {umkmItems.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleUmkmClick(item.page)}
+                  className="block w-full text-left px-6 py-2 text-gray-600 hover:text-emerald-600 font-medium"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

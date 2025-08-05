@@ -8,12 +8,14 @@ import GallerySection from './components/GallerySection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import JelajahiProgram from './pages/JelajahiProgram'; // Import halaman baru
+import UmkmKamboja from './pages/UmkmKamboja';
+import UmkmRambak from './pages/UmkmRambak';
 import { useScroll } from './hooks/useScroll';
 import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'programs'>('home'); // State baru untuk navigasi
+  const [currentPage, setCurrentPage] = useState<'home' | 'programs' | 'umkm-kamboja' | 'umkm-rambak'>('home'); // State baru untuk navigasi
   const { isScrolled } = useScroll();
   const { isVisible: isStatsVisible, elementRef: statsRef } = useIntersectionObserver(0.5);
 
@@ -21,6 +23,12 @@ function App() {
   const handleJelajahiProgram = () => {
     setCurrentPage('programs');
     setIsMenuOpen(false); // Tutup menu jika terbuka
+  };
+
+  // Fungsi untuk navigasi ke halaman UMKM
+  const handleUmkmNavigation = (page: 'umkm-kamboja' | 'umkm-rambak') => {
+    setCurrentPage(page);
+    setIsMenuOpen(false);
   };
 
   // Fungsi untuk kembali ke halaman utama
@@ -37,6 +45,24 @@ function App() {
     );
   }
 
+  // Jika sedang di halaman UMKM Kamboja
+  if (currentPage === 'umkm-kamboja') {
+    return (
+      <div className="min-h-screen bg-white">
+        <UmkmKamboja onBackToHome={handleBackToHome} onUmkmNavigation={handleUmkmNavigation} />
+      </div>
+    );
+  }
+
+  // Jika sedang di halaman UMKM Rambak
+  if (currentPage === 'umkm-rambak') {
+    return (
+      <div className="min-h-screen bg-white">
+        <UmkmRambak onBackToHome={handleBackToHome} onUmkmNavigation={handleUmkmNavigation} />
+      </div>
+    );
+  }
+
   // Halaman utama (tidak berubah, hanya tambah props)
   return (
     <div className="min-h-screen bg-white">
@@ -45,6 +71,7 @@ function App() {
         setIsMenuOpen={setIsMenuOpen}
         isScrolled={isScrolled}
         onJelajahiProgram={handleJelajahiProgram} // Props baru
+        onUmkmNavigation={handleUmkmNavigation} // Props baru untuk UMKM
       />
       
       <HeroSection onJelajahiProgram={handleJelajahiProgram} />

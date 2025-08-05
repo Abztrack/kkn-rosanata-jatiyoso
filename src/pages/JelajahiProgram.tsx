@@ -15,9 +15,10 @@ import { programs } from "../data/programData"; // ✅ Import dari file terpisah
 
 interface JelajahiProgramProps {
   onBackToHome?: () => void;
+  onProgramSelect?: (programId: number) => void;
 }
 
-const JelajahiProgram: React.FC<JelajahiProgramProps> = ({ onBackToHome }) => {
+const JelajahiProgram: React.FC<JelajahiProgramProps> = ({ onBackToHome, onProgramSelect }) => {
   const [selectedCategory, setSelectedCategory] = useState("semua");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -59,11 +60,11 @@ const JelajahiProgram: React.FC<JelajahiProgramProps> = ({ onBackToHome }) => {
       {/* Header */}
       <div className="bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
           {onBackToHome && (
             <button
               onClick={onBackToHome}
-              className="mb-8 flex items-center space-x-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-6 py-3 hover:bg-opacity-30 transition"
+              className="mb-6 flex items-center space-x-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2 hover:bg-opacity-30 transition"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Kembali ke Beranda</span>
@@ -75,16 +76,16 @@ const JelajahiProgram: React.FC<JelajahiProgramProps> = ({ onBackToHome }) => {
               isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
             }`}
           >
-            <div className="inline-flex items-center space-x-2 bg-white bg-opacity-20 rounded-full px-6 py-2 mb-6 backdrop-blur-sm">
-              <Target className="w-4 h-4" />
-              <span className="text-sm font-medium">Program Kerja KKN</span>
+            <div className="inline-flex items-center space-x-2 bg-white bg-opacity-20 rounded-full px-4 py-1 mb-4 backdrop-blur-sm">
+              <Target className="w-3 h-3" />
+              <span className="text-xs font-medium">Program Kerja KKN</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-yellow-200 to-emerald-200 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-yellow-200 to-emerald-200 bg-clip-text text-transparent">
               Jelajahi Program
             </h1>
 
-            <p className="text-xl md:text-2xl text-emerald-100 max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-emerald-100 max-w-3xl mx-auto leading-relaxed font-light">
               Temukan berbagai program inovatif yang kami jalankan untuk memberdayakan masyarakat dan mengembangkan potensi desa
             </p>
           </div>
