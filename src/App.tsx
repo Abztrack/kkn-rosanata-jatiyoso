@@ -1,5 +1,6 @@
-// App.tsx - Update minimal sesuai struktur yang sudah ada
+// src/App.tsx
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';
@@ -7,100 +8,68 @@ import VillagesSection from './components/VillagesSection';
 import GallerySection from './components/GallerySection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import JelajahiProgram from './pages/JelajahiProgram'; // Import halaman baru
+import JelajahiProgram from './pages/JelajahiProgram';
 import UmkmKamboja from './pages/UmkmKamboja';
 import UmkmRambak from './pages/UmkmRambak';
-import { useScroll } from './hooks/useScroll';
-import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 import KatalogPage from './pages/KatalogPage';
 
+import { useScroll } from './hooks/useScroll';
+import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 
-function App() {
+// Komponen HomePage dipisah agar bisa digunakan dalam route
+const HomePage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'programs' | 'umkm-kamboja' | 'umkm-rambak' | 'katalog'>('home');
+  const navigate = useNavigate();
+
   const { isScrolled } = useScroll();
   const { isVisible: isStatsVisible, elementRef: statsRef } = useIntersectionObserver(0.5);
 
-  // Fungsi untuk navigasi ke halaman program
   const handleJelajahiProgram = () => {
-    setCurrentPage('programs');
-    setIsMenuOpen(false); // Tutup menu jika terbuka
+    navigate('/programs');
   };
 
-  // Fungsi untuk navigasi ke halaman UMKM
   const handleUmkmNavigation = (page: 'umkm-kamboja' | 'umkm-rambak' | 'katalog') => {
-    setCurrentPage(page);
-    setIsMenuOpen(false);
+    navigate(`/${page}`);
   };
 
-  // Fungsi untuk kembali ke halaman utama
-  const handleBackToHome = () => {
-    setCurrentPage('home');
-  };
-
-  // Jika sedang di halaman program, render halaman program
-  if (currentPage === 'programs') {
-    return (
-      <div className="min-h-screen bg-white">
-        <JelajahiProgram onBackToHome={handleBackToHome} />
-      </div>
-    );
-  }
-
-  // Jika sedang di halaman UMKM Kamboja
-  if (currentPage === 'umkm-kamboja') {
-    return (
-      <div className="min-h-screen bg-white">
-        <UmkmKamboja onBackToHome={handleBackToHome} onUmkmNavigation={handleUmkmNavigation} />
-      </div>
-    );
-  }
-
-  // Jika sedang di halaman UMKM Rambak
-  if (currentPage === 'umkm-rambak') {
-    return (
-      <div className="min-h-screen bg-white">
-        <UmkmRambak onBackToHome={handleBackToHome} onUmkmNavigation={handleUmkmNavigation} />
-      </div>
-    );
-  }
-
-  if (currentPage === 'katalog') {
   return (
     <div className="min-h-screen bg-white">
-      <KatalogPage onBackToHome={handleBackToHome} />
-    </div>
-  );
-}
-
-
-  // Halaman utama (tidak berubah, hanya tambah props)
-  return (
-    <div className="min-h-screen bg-white">
-      <Navigation 
+      <Navigation
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         isScrolled={isScrolled}
-        onJelajahiProgram={handleJelajahiProgram} // Props baru
-        onUmkmNavigation={handleUmkmNavigation} // Props baru untuk UMKM
+        onJelajahiProgram={handleJelajahiProgram}
+        onUmkmNavigation={handleUmkmNavigation}
       />
-      
+
       <HeroSection onJelajahiProgram={handleJelajahiProgram} />
-      
-      <StatsSection 
+
+      <StatsSection
         isStatsVisible={isStatsVisible}
         statsRef={statsRef}
       />
-      
+
       <VillagesSection />
-      
       <GallerySection />
-      
       <ContactSection />
-      
       <Footer />
     </div>
   );
-}
+};
+
+// App utama dengan router
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/programs" element={<JelajahiProgram onBackToHome={() => window.history.back()} />} />
+        <Route path="/umkm-kamboja" element={<UmkmKamboja onBackToHome={() => window.history.back()} onUmkmNavigation={(p) => window.location.href = `/${p}`} />} />
+        <Route path="/umkm-rambak" element={<UmkmRambak onBackToHome={() => window.history.back()} onUmkmNavigation={(p) => window.location.href = `/${p}`} />} />
+        <Route path="/katalog" element={<KatalogPage onBackToHome={() => window.history.back()} />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
