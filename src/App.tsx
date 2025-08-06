@@ -12,10 +12,12 @@ import UmkmKamboja from './pages/UmkmKamboja';
 import UmkmRambak from './pages/UmkmRambak';
 import { useScroll } from './hooks/useScroll';
 import { useIntersectionObserver } from './hooks/useIntersectionObserver';
+import KatalogPage from './pages/KatalogPage';
+
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'programs' | 'umkm-kamboja' | 'umkm-rambak'>('home'); // State baru untuk navigasi
+  const [currentPage, setCurrentPage] = useState<'home' | 'programs' | 'umkm-kamboja' | 'umkm-rambak' | 'katalog'>('home');
   const { isScrolled } = useScroll();
   const { isVisible: isStatsVisible, elementRef: statsRef } = useIntersectionObserver(0.5);
 
@@ -26,7 +28,7 @@ function App() {
   };
 
   // Fungsi untuk navigasi ke halaman UMKM
-  const handleUmkmNavigation = (page: 'umkm-kamboja' | 'umkm-rambak') => {
+  const handleUmkmNavigation = (page: 'umkm-kamboja' | 'umkm-rambak' | 'katalog') => {
     setCurrentPage(page);
     setIsMenuOpen(false);
   };
@@ -62,6 +64,15 @@ function App() {
       </div>
     );
   }
+
+  if (currentPage === 'katalog') {
+  return (
+    <div className="min-h-screen bg-white">
+      <KatalogPage onBackToHome={handleBackToHome} />
+    </div>
+  );
+}
+
 
   // Halaman utama (tidak berubah, hanya tambah props)
   return (
