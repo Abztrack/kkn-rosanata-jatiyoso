@@ -3,7 +3,7 @@ import React from 'react';
 import { ArrowLeft, Download, MapPin, Phone, Clock } from 'lucide-react';
 
 interface KatalogPageProps {
-  onBackToHome: () => void;
+  onBackToHome?: () => void;
 }
 
 const KatalogPage: React.FC<KatalogPageProps> = ({ onBackToHome }) => {

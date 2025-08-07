@@ -75,10 +75,10 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
           {/* Image Section */}
           <div className="space-y-6">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              <img
-                src="../public/rambak_1.jpg"
-                alt="Rambak Mbak Yuni"
-                className="w-full h-96 object-cover"
+                                <img
+                    src="/rambak_1.jpg"
+                    alt="Rambak Mbak Yuni"
+                    className="w-full h-96 object-cover"
                 onError={(e) => {
                   e.currentTarget.src = "https://via.placeholder.com/600x400/10B981/FFFFFF?text=Rambak+Mbak+Yuni";
                 }}
@@ -88,7 +88,7 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
             <div className="grid grid-cols-2 gap-4">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/rambak_2.jpg"
+                  src="/rambak_2.jpg"
                   alt="Proses Pembuatan"
                   className="w-full h-32 object-cover"
                   onError={(e) => {
@@ -98,7 +98,7 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
               </div>
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/rambak_3.jpg"
+                  src="/rambak_3.jpg"
                   alt="Hasil Produksi"
                   className="w-full h-32 object-cover"
                   onError={(e) => {
@@ -183,7 +183,7 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
             <div className="text-center space-y-4">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/rambak_4.jpg"
+                  src="/rambak_4.jpg"
                   alt="Produk 2"
                   className="w-full h-48 object-cover"
                   onError={(e) => {

@@ -57,16 +57,58 @@ const HomePage: React.FC = () => {
   );
 };
 
+// Wrapper component untuk halaman dengan proper navigation
+const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const navigate = useNavigate();
+  
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  const handleUmkmNavigation = (page: 'umkm-kamboja' | 'umkm-rambak' | 'katalog') => {
+    navigate(`/${page}`);
+  };
+
+  // Clone children dan inject props
+  const childrenWithProps = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        onBackToHome: handleBackToHome,
+        onUmkmNavigation: handleUmkmNavigation
+      } as any);
+    }
+    return child;
+  });
+
+  return <>{childrenWithProps}</>;
+};
+
 // App utama dengan router
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/programs" element={<JelajahiProgram onBackToHome={() => window.history.back()} />} />
-        <Route path="/umkm-kamboja" element={<UmkmKamboja onBackToHome={() => window.history.back()} onUmkmNavigation={(p) => window.location.href = `/${p}`} />} />
-        <Route path="/umkm-rambak" element={<UmkmRambak onBackToHome={() => window.history.back()} onUmkmNavigation={(p) => window.location.href = `/${p}`} />} />
-        <Route path="/katalog" element={<KatalogPage onBackToHome={() => window.history.back()} />} />
+        <Route path="/programs" element={
+          <PageWrapper>
+            <JelajahiProgram />
+          </PageWrapper>
+        } />
+        <Route path="/umkm-kamboja" element={
+          <PageWrapper>
+            <UmkmKamboja />
+          </PageWrapper>
+        } />
+        <Route path="/umkm-rambak" element={
+          <PageWrapper>
+            <UmkmRambak />
+          </PageWrapper>
+        } />
+        <Route path="/katalog" element={
+          <PageWrapper>
+            <KatalogPage />
+          </PageWrapper>
+        } />
       </Routes>
     </Router>
   );

@@ -75,10 +75,10 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
           {/* Image Section */}
           <div className="space-y-6">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              <img
-                src="../public/judul_kamboja_jepang.jpg"
-                alt="Kamboja Jepang Mas Sutardi"
-                className="w-full h-96 object-cover"
+                                <img
+                    src="/judul_kamboja_jepang.jpg"
+                    alt="Kamboja Jepang Mas Sutardi"
+                    className="w-full h-96 object-cover"
                 onError={(e) => {
                   e.currentTarget.src = "https://via.placeholder.com/600x400/10B981/FFFFFF?text=Kamboja+Jepang+Mas+Sutardi";
                 }}
@@ -88,7 +88,7 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
             <div className="grid grid-cols-2 gap-4">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/proses_kamboja_2.jpg"
+                  src="/proses_kamboja_2.jpg"
                   alt="Proses Pembuatan"
                   className="w-full h-32 object-cover"
                   onError={(e) => {
@@ -98,7 +98,7 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
               </div>
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/proses_kamboja_3.jpg"
+                  src="/proses_kamboja_3.jpg"
                   alt="Hasil Produksi"
                   className="w-full h-32 object-cover"
                   onError={(e) => {
@@ -168,7 +168,7 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
             <div className="text-center space-y-4">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/adenium_cabang_seribu.jpg"
+                  src="/adenium_cabang_seribu.jpg"
                   alt="Produk 1"
                   className="w-full h-48 object-cover"
                   onError={(e) => {
@@ -185,7 +185,7 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
             <div className="text-center space-y-4">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/adenium_merah.jpg"
+                  src="/adenium_merah.jpg"
                   alt="Produk 2"
                   className="w-full h-48 object-cover"
                   onError={(e) => {
@@ -202,7 +202,7 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
             <div className="text-center space-y-4">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
-                  src="../public/adenium_putih.jpg"
+                  src="/adenium_putih.jpg"
                   alt="Produk 3"
                   className="w-full h-48 object-cover"
                   onError={(e) => {

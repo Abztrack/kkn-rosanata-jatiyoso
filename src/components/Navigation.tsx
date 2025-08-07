@@ -7,7 +7,7 @@ interface NavigationProps {
   setIsMenuOpen: (open: boolean) => void;
   isScrolled: boolean;
   onJelajahiProgram?: () => void; // Tambahan props untuk navigasi ke program
-  onUmkmNavigation?: (page: 'umkm-kamboja' | 'umkm-rambak') => void; // Props untuk navigasi UMKM
+  onUmkmNavigation?: (page: 'umkm-kamboja' | 'umkm-rambak' | 'katalog') => void; // Props untuk navigasi UMKM
 }
 
 const Navigation: React.FC<NavigationProps> = ({ 
@@ -62,7 +62,7 @@ const Navigation: React.FC<NavigationProps> = ({
     setIsMenuOpen(false); // Tutup menu mobile setelah klik
   };
 
-  const handleUmkmClick = (page: 'umkm-kamboja' | 'umkm-rambak') => {
+  const handleUmkmClick = (page: 'umkm-kamboja' | 'umkm-rambak' | 'katalog') => {
     if (onUmkmNavigation) {
       onUmkmNavigation(page);
     }
