@@ -54,15 +54,11 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
             <div className="flex flex-wrap justify-center items-center gap-4 text-emerald-100 text-sm">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4" />
-                <span>Desa Karangsari, Jatiyoso</span>
+                <span>Dusun Karang, Desa Karangsari, Kecamatan Jatiyoso</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span>+62 812-3456-7890</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock className="w-4 h-4" />
-                <span>08:00 - 17:00 WIB</span>
+                <span>+62 822-6654-6801</span>
               </div>
             </div>
           </div>
@@ -231,7 +227,7 @@ const UmkmKamboja: React.FC<UmkmKambojaProps> = ({ onBackToHome, onUmkmNavigatio
             </div>
             <div className="flex items-center space-x-2">
               <MapPin className="w-5 h-5" />
-              <span>Desa Karangsari, Jatiyoso</span>
+              <span>Dusun Karang, Desa Karangsari, Kecamatan Jatiyoso</span>
             </div>
           </div>
         </div>

@@ -54,15 +54,11 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
             <div className="flex flex-wrap justify-center items-center gap-4 text-emerald-100 text-sm">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4" />
-                <span>Desa Tlobo, Jatiyoso</span>
+                <span>Dusun Tlobo, Desa Karangsari, Kecamatan Jatiyoso</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span>+62 812-3456-7891</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock className="w-4 h-4" />
-                <span>07:00 - 18:00 WIB</span>
+                <span>+62 852-2944-8621</span>
               </div>
             </div>
           </div>
@@ -162,56 +158,20 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
         <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Produk Unggulan</h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center space-y-4">
-              <div className="relative overflow-hidden rounded-xl shadow-lg">
-                <img
-                  src="/placeholder-product-1.jpg"
-                  alt="Produk 1"
-                  className="w-full h-48 object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://via.placeholder.com/400x300/10B981/FFFFFF?text=Produk+1";
-                  }}
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900">Rambak Tradisional</h3>
-              <p className="text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-
-            <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <div className="text-center space-y-4 max-w-md">
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 <img
                   src="/rambak_4.jpg"
-                  alt="Produk 2"
-                  className="w-full h-48 object-cover"
+                  alt="Rambak"
+                  className="w-full h-64 object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = "https://via.placeholder.com/400x300/059669/FFFFFF?text=Produk+2";
+                    e.currentTarget.src = "https://via.placeholder.com/400x300/059669/FFFFFF?text=Rambak";
                   }}
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">Rambak Modern</h3>
-              <p className="text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="relative overflow-hidden rounded-xl shadow-lg">
-                <img
-                  src="/placeholder-product-3.jpg"
-                  alt="Produk 3"
-                  className="w-full h-48 object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://via.placeholder.com/400x300/047857/FFFFFF?text=Produk+3";
-                  }}
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900">Rambak Custom</h3>
-              <p className="text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              <h3 className="text-xl font-semibold text-gray-900">Rambak</h3>
+              <p className="text-gray-600">Produk rambak berkualitas tinggi dari Mbak Yuni</p>
             </div>
           </div>
         </div>
@@ -229,7 +189,7 @@ const UmkmRambak: React.FC<UmkmRambakProps> = ({ onBackToHome, onUmkmNavigation 
             </div>
             <div className="flex items-center space-x-2">
               <MapPin className="w-5 h-5" />
-              <span>Desa Tlobo, Jatiyoso</span>
+              <span>Dusun Tlobo, Desa Karangsari, Kecamatan Jatiyoso</span>
             </div>
           </div>
         </div>

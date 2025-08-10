@@ -42,7 +42,7 @@ const Navigation: React.FC<NavigationProps> = ({
   ];
 
   const umkmItems = [
-  { label: 'Katalog UMKM Tlobo', page: 'katalog' as const },
+  { label: 'Katalog UMKM Desa Tlobo', page: 'katalog' as const },
   { label: 'Kamboja Jepang "Mas Sutardi"', page: 'umkm-kamboja' as const },
   { label: 'Rambak "Mbak Yuni"', page: 'umkm-rambak' as const }
 ];
